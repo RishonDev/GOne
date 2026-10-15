@@ -1,0 +1,80 @@
+{
+  "name": "gone",
+  "productName": "GOne",
+  "version": "1.0.0",
+  "description": "A Google suite for the Linux desktop: gradient-branded app launcher, native notifications, tray and desktop integration.",
+  "main": "src/main.js",
+  "desktopName": "gone.desktop",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "install-desktop": "node scripts/install-desktop.js",
+    "uninstall-desktop": "node scripts/install-desktop.js --uninstall",
+    "dist": "electron-builder --linux",
+    "dist:dir": "electron-builder --linux dir"
+  },
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "imapflow": "^2.4.3",
+    "mailparser": "^3.9.39",
+    "nodemailer": "^10.1.1"
+  },
+  "author": "GOne <mithicalaviator85@gmail.com>",
+  "homepage": "https://github.com/",
+  "build": {
+    "appId": "dev.gone.suite",
+    "productName": "GOne",
+    "executableName": "gone",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "linux": {
+      "target": [
+        "AppImage",
+        "pacman",
+        "deb",
+        "tar.gz"
+      ],
+      "icon": "build/icon.png",
+      "category": "Network",
+      "synopsis": "Google suite for the Linux desktop",
+      "description": "Native-feeling Gmail, Calendar, Tasks, Contacts and Drive plus launchers for the rest of Google's apps, with desktop notifications.",
+      "mimeTypes": [
+        "x-scheme-handler/mailto"
+      ],
+      "desktop": {
+        "entry": {
+          "StartupWMClass": "GOne",
+          "Keywords": "google;gmail;calendar;drive;mail;"
+        }
+      }
+    },
+    "pacman": {
+      "depends": [
+        "gtk3",
+        "nss",
+        "libxss",
+        "libnotify"
+      ]
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils"
+      ]
+    }
+  }
+}
